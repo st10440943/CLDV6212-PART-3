@@ -1,0 +1,49 @@
+﻿@model ABC_Retail.Models.LoginViewModel
+@using Microsoft.AspNetCore.Identity
+@inject SignInManager<ABC_Retail.Models.Users> SignInManager
+@inject UserManager<ABC_Retail.Models.Users> UserManager
+
+@{
+    ViewData["Title"] = "Login";
+}
+
+<div class="row justify-content-center mb-5">
+    <div class="col-md-4">
+        <div class="card shadow-sm">
+            <div class="card-body">
+                <h4 class="card-title text-center mb-3">Login</h4>
+                @if (TempData["LoginError"] != null)
+                {
+                    <div class="alert alert-danger">@TempData["LoginError"]</div>
+                }
+                <form asp-controller="Account" asp-action="Login" method="post">
+                    <div class="mb-3">
+                        <label for="Email" class="form-label">Email</label>
+                        <input asp-for="Email" class="form-control" id="Email" required />
+                        <span asp-validation-for="Email" class="text-danger"></span>
+                    </div>
+                    <div class="mb-3">
+                        <label for="Password" class="form-label">Password</label>
+                        <input asp-for="Password" type="password" class="form-control" id="Password" required />
+                        <span asp-validation-for="Password" class="text-danger"></span>
+                    </div>
+                    <div class="mb-3 form-check">
+                        <input asp-for="RememberMe" class="form-check-input" id="RememberMe" />
+                        <label class="form-check-label" for="RememberMe">Remember Me</label>
+                    </div>
+                    <button type="submit" class="btn btn-primary w-100">Login</button>
+                </form>
+                <small class="text-muted d-block mt-3">
+                    Use one of these test accounts:<br />
+                    <strong>Customer1@test.com / Password123</strong> - Customer<br />
+                    <strong>Customer2@test.com / Password123</strong> - Customer<br />
+                    <strong>Admin@test.com / Admin123</strong> - Admin
+                </small>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
